@@ -1,0 +1,11 @@
+[Unit]
+Description=This is the lenken frontend
+After=syslog.target
+[Service]
+ExecStart=/bin/bash -c "cd /var/app/lenken && node index.js"
+RestartSec=5s
+Restart=on-success
+User=root
+
+[Install]
+WantedBy=multi-user.target

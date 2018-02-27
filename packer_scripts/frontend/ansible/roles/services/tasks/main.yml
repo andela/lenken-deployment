@@ -1,0 +1,18 @@
+- name: ensure service path exists
+  file:
+    path: /etc/systemd/system/
+    state: directory
+
+- name: create lenken service
+  copy:
+    src: files/lenken.service
+    dest: /etc/systemd/system/lenken.service
+
+- name: Enable service
+  command: systemctl enable lenken.service
+
+- name: Start service
+  service:
+    name: lenken
+    state: started
+  

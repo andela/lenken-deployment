@@ -1,0 +1,35 @@
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Ensure cert folder exists
+  file:
+    path: /etc/ssl/certs/
+    state: directory
+
+- name: Copy nginx configuration
+  copy:
+    src: files/nginx.conf
+    dest: /etc/nginx/sites-enabled/default
+
+- name: Copy nginx gzip config
+  copy:
+    src: files/gzip.conf
+    dest: /etc/nginx/conf.d
+
+- name: Copy crt certificate
+  copy:
+    src: files/certificate.crt
+    dest: /etc/ssl/certs/certificate.crt
+
+- name: copy key file
+  copy:
+    src: files/certificate.key
+    dest: /etc/ssl/certs/certificate.key
+
+- name: Test nginx
+  command: nginx -t
+
+- name: Restart nginx
+  command: service nginx restart 

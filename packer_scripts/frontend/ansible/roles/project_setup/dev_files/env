@@ -1,0 +1,27 @@
+export interface Firebase {
+  apiKey: string;
+  authDomain: string;
+  databaseURL: string;
+  projectId?: string;
+  storageBucket: string;
+  messagingSenderId?: string;
+}
+
+const firebaseConfigObject: Firebase = {
+  apiKey: 'AIzaSyDF5hVbvUUVnJTp0waVh3qPhwgjZst4f6U',
+  authDomain: 'lenken-staging-messaging.firebaseapp.com',
+  databaseURL: 'https://lenken-staging-messaging.firebaseio.com',
+  projectId: 'lenken-staging-messaging',
+  storageBucket: 'lenken-staging-messaging.appspot.com',
+  messagingSenderId: '181468316764',
+};
+
+export const environment = {
+  production: false,
+  firebaseConfig: firebaseConfigObject,
+  apiBaseUrl: 'https://lenken-api-test.andela.com/api',
+  lenkenBaseUrl: 'https://lenken-front-test.andela.com',
+  apiGateway: 'https://api-staging.andela.com',
+  segmentAPIKey: 'WmVlgctp4KY8XpgNBMveGUtimL9TW8ke',
+  segmentAPIBaseUrl: 'https://api.segment.io',
+};

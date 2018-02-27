@@ -1,0 +1,26 @@
+- name: Install transport https
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Configure the Yarn APT key
+  apt_key: 
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
+
+- name: Add Yarn repository
+  apt_repository:
+    repo: 'deb https://dl.yarnpkg.com/debian/ stable main'
+    state: present
+
+- name: update system
+  shell: apt-get update
+
+- name: Upgrade installed packages
+  apt:
+    upgrade: dist
+
+- name: Install git
+  apt:
+    name: git
+    state: present

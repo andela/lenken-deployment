@@ -1,0 +1,10 @@
+- hosts: all
+  become: true
+  roles:
+    - update
+    - node
+    - project_setup
+    - services
+    - nginx
+  environment:
+    ENV: production

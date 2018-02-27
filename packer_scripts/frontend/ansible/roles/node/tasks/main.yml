@@ -1,0 +1,26 @@
+- name: Create temp directory
+  file:
+    path: /temp
+    state: directory
+      
+- name: Download Node 7.7.2
+  get_url: url=https://nodejs.org/download/release/v7.7.2/node-v7.7.2-linux-x64.tar.gz dest=/temp/node.tar.gz
+
+- name: unpack nodejs
+  unarchive:
+    src: /temp/node.tar.gz
+    dest: /temp
+    remote_src: yes
+
+- name: Move node executable to bin folder
+  command: cp /temp/node-v7.7.2-linux-x64/bin/node /usr/local/bin/node
+
+- name: Move npm executable to bin folder
+  command: cp /temp/node-v7.7.2-linux-x64/bin/npm /usr/local/bin/npm
+
+- name: install yarn
+  apt: 
+    name: yarn
+    state: present
+
+
