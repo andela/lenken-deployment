@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  #Service name
+  name: lenken
+spec:
+  selector:
+    app: lenken
+  ports:
+    - protocol: TCP
+      port: 4200
+      targetPort: 4200
+  type: LoadBalancer
