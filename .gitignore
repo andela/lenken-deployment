@@ -1,1 +1,3 @@
 Packer/auth.json
+*.crt
+*.key

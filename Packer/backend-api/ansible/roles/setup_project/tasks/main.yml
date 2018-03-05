@@ -1,0 +1,66 @@
+- name: ensure application directory exists
+  file:
+    path: /var/app/lenken_api
+    state: directory
+    mode: 777
+
+- name: ensure .ssh directory
+  file:
+    path: /etc/.ssh
+    state: directory
+    mode: 400
+
+- name: copy ssh key
+  copy:
+    src: ~/.ssh/id_rsa
+    dest: /etc/.ssh/id_rsa
+
+- name: change mode
+  shell: chmod 400 /etc/.ssh/id_rsa
+
+- name: Create none existent cache directories
+  command: sudo mkdir -p "{{item}}"
+  with_items:
+    - ~/.composer/cache/files/
+    - ~/.composer/cache/repo/https
+  become: true
+  become_user: lenken-api
+  become_method: sudo
+
+- name: Setup permissions
+  command: sudo chown -R lenken-api "{{item}}"
+  with_items:
+    - ~/.composer/cache/files/
+    - ~/.composer/cache/repo/https
+    - ~/.composer/
+  become: true
+  become_user: lenken-api
+
+
+- name: Ensure setfacl support is present
+  package: name=acl
+
+- name: clone repository
+  git:
+    repo: 'git@github.com:andela/lenken-server.git'
+    dest: /var/app/lenken_api
+    accept_hostkey: yes
+    key_file: /etc/.ssh/id_rsa
+
+- name: download composer
+  get_url:
+    url: https://getcomposer.org/composer.phar
+    dest: /usr/local/bin/composer
+    mode: 0755
+
+- name: install requirements
+  command: sudo composer install --no-suggest
+  args: 
+    chdir: /var/app/lenken_api
+  become_user: lenken-api
+  ignore_errors: yes
+
+- name: Copy env variables
+  copy:
+    src: templates/env.config
+    dest: /var/app/lenken_api/.env

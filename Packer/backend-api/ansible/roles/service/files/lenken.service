@@ -1,0 +1,11 @@
+[Unit]
+Description=This is the lenken backend
+After=syslog.target
+[Service]
+ExecStart=/bin/bash -c "cd /var/app/lenken_api && php -S 127.0.0.1:3000"
+RestartSec=5s
+Restart=on-success
+User=root
+
+[Install]
+WantedBy=multi-user.target

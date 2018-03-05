@@ -6,17 +6,17 @@
 
 - name: ensure .ssh directory
   file:
-    path: /etc/.ssh
+    path: ~/.ssh
     state: directory
     mode: 400
 
 - name: copy ssh key
   copy:
     src: ~/.ssh/id_rsa
-    dest: /etc/.ssh/id_rsa
+    dest: ~/.ssh/id_rsa
 
 - name: change mode
-  shell: chmod 400 /etc/.ssh/id_rsa
+  shell: chmod 400 ~/.ssh/id_rsa
 
 - name: Ensure setfacl support is present
   package: name=acl
@@ -26,7 +26,17 @@
     repo: 'git@github.com:andela/lenken.git'
     dest: /var/app/lenken
     accept_hostkey: yes
-    key_file: /etc/.ssh/id_rsa
+    key_file: ~/.ssh/id_rsa
+
+- name: clone developv2
+  command: git checkout develop-v2
+  args:
+    chdir: /var/app/lenken
+
+- name: clone developv2
+  command: git pull origin develop-v2
+  args:
+    chdir: /var/app/lenken
 
 - name: display
   shell: ls /var/app/lenken
@@ -44,7 +54,7 @@
 - name: Copy lenken production config
   copy:
     src: dev_files/environment.prod
-    dest: /var/app/lenken/src/environments/environment.prod.ys
+    dest: /var/app/lenken/src/environments/environment.prod.ts
     backup: yes
 
 - name: Copy lenken envs config
@@ -53,5 +63,7 @@
     dest: /var/app/lenken/src/envs.ts
     backup: yes
 
-- name: build project
-  shell: cd /var/app/lenken && yarn build
+- name: build application
+  command: yarn build
+  args:
+    chdir: /var/app/lenken

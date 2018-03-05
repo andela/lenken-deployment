@@ -1,0 +1,26 @@
+- name: Install php7
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php7.1
+    - php7.1-cli
+    - php7.1-mbstring
+    - php7.1-xml 
+    - php7.1-curl
+    - php-memcached
+    - php7.1-zip
+    - zip
+    - unzip
+    - php7.1-pgsql
+
+- name: enable extensions
+  command: phpenmod "{{item}}"
+  with_items:
+    - mbstring
+    - xml
+    - curl
+    - zip
+    - memcached
+    - pgsql
+
