@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lenken-backend
+  labels:
+    #Project ID
+    app: andela-learning
+spec:
+  #Run three instances of our application
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: andela-learning
+    spec:
+      #Container details
+      containers:
+        - name: lenken-backend
+          image: gcr.io/andela-learning/lenken-backend:0.0.1
+          imagePullPolicy: Always
+          #Ports to expose
+          ports:
+          - containerPort: 3000
