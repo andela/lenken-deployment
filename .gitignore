@@ -1,3 +1,9 @@
 Packer/auth.json
-**.crt
-**.key
+Terraform/shared/account.json
+Terraform/terraform.tfstate.backup
+Terraform/terraform.tfstate
+Terraform/.terraform/
+Terraform/shared/andela_key.key
+Terraform/shared/andela_certificate.crt
+.*.swp
+.*.swo
