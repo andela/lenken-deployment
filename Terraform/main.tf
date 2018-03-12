@@ -8,7 +8,10 @@ provider "google" {
 // Configure Terraform Backend
 terraform {
   backend "gcs" {
-    credentials = "./shared/account.json"
+    bucket = "lenken-staging-tf-state"
+    path = "default.tfstate"
+    project = "lenken-app"
+    credentials = "./shared/lenken-account.json"
   }
 }
 
@@ -16,7 +19,7 @@ terraform {
 data "terraform_remote_state" "lenken" {
   backend = "gcs"
   config {
-    bucket = "lenken-tf-state"
+    bucket = "${var.bucket}"
     project = "${var.project_id}"
     credentials = "${file("${var.credential_file}")}"
   }

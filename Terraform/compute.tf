@@ -67,8 +67,8 @@ resource "google_compute_instance_template" "lenken-frontend-template" {
   region = "${var.region}"
   description = "Lenken Frontend base template"
   instance_description = "Instance created from base template"
-  # depends_on = ["google_sql_database_instance.vof-database-instance", "random_id.vof-db-user-password"]
-  tags = ["${var.env_name}-lenken-frontend", "lenken-frontend"]
+  depends_on = ["google_compute_instance.lenken-redis-server"]
+  tags = ["${var.env_name}-lenken-frontend", "lenken-frontend", "private-instance", "http-server", "https-server"]
 
   network_interface {
     subnetwork = "${google_compute_subnetwork.lenken-private-subnetwork-tf.name}"
@@ -76,7 +76,7 @@ resource "google_compute_instance_template" "lenken-frontend-template" {
   }
 
   disk {
-    source_image = "lenken-frontend-base"
+    source_image = "${var.lenken_frontend_image}"
     auto_delete = true
     boot = true
     disk_type = "${var.lenken_disk_type}"
@@ -111,8 +111,8 @@ resource "google_compute_instance_template" "lenken-api-template" {
   region = "${var.region}"
   description = "Lenken API base template"
   instance_description = "Instance created from base template"
-  # depends_on = ["google_sql_database_instance.vof-database-instance", "random_id.vof-db-user-password"]
-  tags = ["${var.env_name}-lenken-backend", "lenken-backend"]
+  depends_on = ["google_compute_instance.lenken-redis-server"]
+  tags = ["${var.env_name}-lenken-backend", "lenken-backend", "private-instance", "http-server", "https-server"]
 
   network_interface {
     subnetwork = "${google_compute_subnetwork.lenken-private-subnetwork-tf.name}"
@@ -120,7 +120,7 @@ resource "google_compute_instance_template" "lenken-api-template" {
   }
 
   disk {
-    source_image = "lenken-backendapi-base"
+    source_image = "${var.lenken_backend_image}"
     auto_delete = true
     boot = true
     disk_type = "${var.lenken_disk_type}"

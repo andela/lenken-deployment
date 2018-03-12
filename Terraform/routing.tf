@@ -42,21 +42,30 @@ resource "google_compute_url_map" "lenken-http-url-map" {
   default_service = "${google_compute_backend_service.lenken-frontend-backendservice.self_link}"
 
   host_rule {
-    hosts        = ["${var.reserved_env_ip}"]
-    path_matcher = "allpaths"
+    hosts        = ["lenken-staging-test.andela.com"]
+    path_matcher = "frontendpaths"
   }
+
   path_matcher {
-    name            = "allpaths"
+    name            = "frontendpaths"
     default_service = "${google_compute_backend_service.lenken-frontend-backendservice.self_link}"
-
-     path_rule {
-      paths   = ["/api"]
-      service = "${google_compute_backend_service.lenken-api-backendservice.self_link}"
-    }
-
-     path_rule {
+    path_rule {
       paths   = ["/*"]
       service = "${google_compute_backend_service.lenken-frontend-backendservice.self_link}"
+    }
+  }
+
+  host_rule {
+    hosts        = ["lenken-api-staging.andela.com"]
+    path_matcher = "apipaths"
+  }
+
+  path_matcher {
+    name            = "apipaths"
+    default_service = "${google_compute_backend_service.lenken-api-backendservice.self_link}"
+    path_rule {
+      paths   = ["/*"]
+      service = "${google_compute_backend_service.lenken-api-backendservice.self_link}"
     }
   }
 }
@@ -80,6 +89,7 @@ resource "google_compute_firewall" "lenken-internal-firewall" {
   }
 
   source_ranges = ["${var.ip_cidr_range}"]
+  source_tags = ["allow-internal"]
 }
 
 resource "google_compute_firewall" "lenken-public-firewall" {
@@ -95,6 +105,31 @@ resource "google_compute_firewall" "lenken-public-firewall" {
   target_tags = ["${var.env_name}-lenken-lb"]
 }
 
+resource "google_compute_firewall" "firewall_api_allow_http" {
+  name          = "allow-http-api"
+  description   = "Allow HTTP access across the firewall into the API Virtual Private Cloud."
+  network       = "${google_compute_network.lenken-network-tf.name}"
+  allow {
+    protocol    = "tcp"
+    ports       = ["80", "8080"]
+  }
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["http-server"]
+}
+
+resource "google_compute_firewall" "firewall_api_allow_https" {
+  name          = "allow-https-api"
+  description   = "Allow HTTPS access across the firewall into the api Virtual Private Cloud."
+  network       = "${google_compute_network.lenken-network-tf.name}"
+  allow {
+    protocol    = "tcp"
+    ports       = ["443"]
+  }
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["https-server"]
+}
+
+
 resource "google_compute_firewall" "lenken-allow-healthcheck-firewall" {
   name = "${var.env_name}-lenken-allow-healthcheck-firewall"
   network = "${google_compute_network.lenken-network-tf.name}"
@@ -106,4 +141,52 @@ resource "google_compute_firewall" "lenken-allow-healthcheck-firewall" {
 
   source_ranges = ["35.227.0.0/16","0.0.0.0/0"]
   target_tags = ["${var.env_name}-lenken-backend", "lenken-backend", "${var.env_name}-lenken-frontend", "lenken-frontend"]
+}
+
+resource "google_compute_firewall" "lenken-allow-redis" {
+  name = "${var.env_name}-lenken-allow-redis"
+  network = "${google_compute_network.lenken-network-tf.name}"
+
+  allow {
+    protocol = "tcp"
+    ports = ["6379"]
+  }
+
+  source_tags = ["allow-redis"]
+}
+
+resource "google_compute_firewall" "lenken-nat-egress" {
+  name = "${var.env_name}-lenken-nat-egress"
+  network = "${google_compute_network.lenken-network-tf.name}"
+  direction = "EGRESS"
+
+  allow {
+    protocol = "tcp"
+    ports = ["22", "80"]
+  }
+
+  destination_ranges = ["10.0.0.0/16"]
+}
+
+resource "google_compute_firewall" "lenken-nat-ingress" {
+  name = "${var.env_name}-lenken-nat-ingress"
+  network = "${google_compute_network.lenken-network-tf.name}"
+  direction = "EGRESS"
+
+  allow {
+    protocol = "tcp"
+    ports = ["22", "80"]
+  }
+  target_tags = ["nat-ingress"]
+}
+
+resource "google_compute_firewall" "lenken-allow-ssh" {
+  name = "${var.env_name}-lenken-allow-ssh"
+  network = "${google_compute_network.lenken-network-tf.name}"
+
+  allow {
+    protocol = "tcp"
+    ports = ["22"]
+  }
+  target_tags = ["allow-ssh"]
 }
