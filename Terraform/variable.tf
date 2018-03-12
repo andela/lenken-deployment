@@ -1,11 +1,11 @@
 variable "credential_file" {
   type = "string"
-  default = "./shared/account.json"
+  default = "./shared/lenken-account.json"
 }
 
 variable "project_id" {
   type = "string"
-  default = "andela-learning"
+  default = "lenken-app"
 
 }
 
@@ -21,12 +21,33 @@ variable "zone" {
 
 variable "env_name" {
   type = "string"
-  default = "sandbox"
+}
+
+variable "lenken_frontend_image" {
+  type = "string"
+}
+
+variable "lenken_nat_ip" {
+  type = "string"
+}
+
+variable "lenken_backend_image" {
+  type = "string"
+}
+
+variable "lenken-nat-base" {
+  type = "string"
 }
 
 variable "ip_cidr_range" {
   type = "string"
-  default = "10.0.0.0/16"
+  default = "10.0.1.0/24"
+}
+
+
+variable "ip_cidr_range_public" {
+  type = "string"
+  default = "10.0.2.0/24"
 }
 
 variable "machine_type" {
@@ -61,7 +82,7 @@ variable "lenken_disk_size" {
 
 variable "service_account_email" {
   type = "string"
-  default = "lenken-sandbox-auth@andela-learning.iam.gserviceaccount.com"
+  default = "134344413520-compute@developer.gserviceaccount.com"
 }
 
 variable "max_instances" {
@@ -101,3 +122,14 @@ variable "timeout_sec" {
 
 variable "reserved_env_ip" {}
 
+variable "db_instance_tier" {
+  type = "string"
+  default = "db-f1-micro"
+}
+
+variable "db_backup_start_time" {
+  type = "string"
+  default = "00:12"
+}
+
+variable "bucket" {}
