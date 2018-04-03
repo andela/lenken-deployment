@@ -1,6 +1,7 @@
 Packer/auth_lenken_app.json
 **.crt
 **.key
+<<<<<<< HEAD
 Packer/auth.json
 Terraform/shared/lenken-account.json
 Terraform/production/shared/lenken-account.json
@@ -18,3 +19,6 @@ Terraform/production/shared/andela_certificate.crt
 .*.swo
 vars
 .secret
+=======
+Terraform/shared/*
+>>>>>>> ch(documentation): Document lenken infrastructure
