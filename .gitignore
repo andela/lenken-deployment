@@ -1,3 +1,4 @@
 Packer/auth.json
 **.crt
 **.key
+Terraform/shared/*
