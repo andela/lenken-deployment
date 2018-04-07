@@ -2,3 +2,4 @@ Packer/auth.json
 **.crt
 **.key
 Terraform/shared/*
+.DS_Store
