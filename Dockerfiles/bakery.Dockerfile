@@ -42,4 +42,7 @@ WORKDIR $GOPATH/src/github.com/hashicorp/packer
 
 RUN go build -o bin/packer .
 
-RUN apk add ansible
+RUN apk add py-pip
+RUN apk add gcc git libffi-dev musl-dev openssl-dev perl py-pip python python-dev sshpass
+RUN apk add make
+RUN pip install ansible
