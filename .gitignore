@@ -1,9 +1,16 @@
 Packer/auth.json
-Terraform/shared/account.json
+Terraform/shared/lenken-account.json
+Terraform/production/shared/lenken-account.json
 Terraform/terraform.tfstate.backup
+Terraform/production/terraform.tfstate.backup
 Terraform/terraform.tfstate
+Terraform/production/terraform.tfstate
 Terraform/.terraform/
+Terraform/production/.terraform/
 Terraform/shared/andela_key.key
+Terraform/production/shared/andela_key.key
 Terraform/shared/andela_certificate.crt
+Terraform/production/shared/andela_certificate.crt
 .*.swp
 .*.swo
+vars
