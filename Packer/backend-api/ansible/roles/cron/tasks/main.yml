@@ -1,0 +1,5 @@
+- name: Setup cron job to run scheduler
+  cron:
+    name: "Run Scheduler"
+    user: root
+    job: "php /var/app/lenken_api/artisan schedule:run >> /dev/null 2>&1"

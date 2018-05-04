@@ -9,23 +9,25 @@
     state: directory
 
 - name: Copy nginx configuration
-  copy:
-    src: files/nginx.conf
+  vars:
+    domain: "{{ domain }}"
+  template:
+    src: files/nginx.j2
     dest: /etc/nginx/sites-enabled/default
 
 - name: Copy nginx gzip config
   copy:
-    src: files/gzip.conf
+    src: ../../../../../common_files/gzip.conf
     dest: /etc/nginx/conf.d
 
 - name: Copy crt certificate
   copy:
-    src: files/certificate.crt
+    src: ../../../../../common_files/certificate_crt
     dest: /etc/ssl/certs/certificate.crt
 
 - name: copy key file
   copy:
-    src: files/certificate.key
+    src: ../../../../../common_files/certificate_key
     dest: /etc/ssl/certs/certificate.key
 
 - name: Test nginx

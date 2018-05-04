@@ -1,8 +1,13 @@
 - hosts: all
   become: true
+  vars:
+    new_relic_licence: "{{ new_relic_licence }}"
+    new_relic_app: "{{ new_relic_app }}"
   roles:
     - update
     - php7
+    - new_relic
     - setup_project
     - nginx
     - service
+    - cron
