@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "lenken-app",
+    "private_key_id": "f5305337da00e4f09d11cbcf4414509c1bf5eec1",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCobs07/OjdYsB5\nMRdo8hjZs727d5McaJxWZ0pKdnT1aaUP0+JY7bOvLRfoVLv2wE47WDJyK0Y8e6zW\nASz00NtdXQgnbhHHC4aj3/4jWPAc3rM6F0km3lUY57lvphT/4i6ZsqVG+TyrISWE\nyrl567XQyVtUTPpOP1QRgqFsgwovUXqIe7wGtQCN9HDQ6oBQRIL240CbE8ETu+Zd\n235Gahqr0ik7IdPHyR1Fe6rZbFTH5gUeY7Nc7Y/yRcjCH3LIPHXsGtuUPgqAqVTF\nrPmTxwesTHn7b3R2XHIXWs+yJb7992DP3GLfIDiwPArL1oVhjuJMXIQKDwtqZqgw\nMpnSVsPpAgMBAAECggEAAbBmxA5zuV5XXaRVmh8tHVXHmqqZGLboIeDUSvcDkj9R\n5aXzYaNZLAQw0h1FtGtoj7elxwCbqjScJ+M+/M+DqVzPi1ZA4YdUj65J3O50Lfld\ndy69T9hCOOvJZny6q+Vi+4iY4P7T20fCmcYYGRGLjpOpyJZHmuMh1cNnYgKxixih\n1smpIeDfm2k9HU7Wy1oIp2SKKkg6R3EBoBaSh1FgJ6kMDbYuJ6hUL21SVQnLX31A\n5F6h+A/9VKKH1nUh6MM3DLYNeC8n3M1zB0b5B4VuWU28snz5YCOIqB6UGhB+uNmE\nfA0U5m47htIovAJuwYNYLFyYHe6fIDDaKYHeNnq9GQKBgQDZDAInfuZbmN4jvmfF\n4g5bnAvnH6pcsmghfMfkfbKvEGBoj4LYnczqYDvAf0RV7ByJ/6em3fkYzVKzN/IE\nyR34d2fucZTq7M8FENzCGgmCBYpeyV2IphYtYZYaSy/nkqrBpP2oUCIKNhb1ZrS4\n40T4cgSqSK4AtmPwGdTcFg1BJQKBgQDGqUUqNA65/feTDpPwTh1x1oXVTvbgWXsy\nNwApncuE6YVI2NNshc690+KpsLhZLEkYjPW7tIfNZyq2jnItPM9g90nS6tOeaU0X\neJqQ0Ve9gxx5po3XrmvagV6RQo7P96gkBg/pPauJL/OtE4ueKUcrfZ2x3+tbBJhF\nCcAmKMKmdQKBgAvTlq52QLEPBFOoRVlH9wZQ22ktlYfVhM0GUpIFs13Mo6Qu5a9N\n8eN3eOoFRUD1S5zNXGJASBls3qu7SamvF735K6WXdMjUPHeHMrA04P2/tYlyqXEP\ns7enUJmALU0N9dX1Woj4TNKHnfqjLQfCAnkTJWPt7+VECvADSFDxtqktAoGBAJzU\nWkaz7ABGjuCn/IATmskYmnTHrrtzyH7ezqEL8fPOSis1CMs+YvSWxfRCD3ZOMLJR\n7Vgub5rm2+BcWaR+whQBhGUefssqw/JIgnTa3tI8JAmhQ47GIlzQDnDMQ2PIVhOC\nOaNezQEzOsIikPDeE1IxC4G1jN5ApVizFt7JBMlVAoGAb5Mop5/ySrV5HemliSdP\n0/tjWrXki7T1n+daiIqfI0j3Quljl4FeOPFEFZR7kXec1kzqWQBeck/LyScs3yp/\nt5aHY5SLbvO2NRblqTRvTFtfeTp0MBHoJ2GuHKVcRRGCbgSLnvh+3Yg/C7VoKrnz\n5ZPaLdJWlMdSVFo+YX7Ujac=\n-----END PRIVATE KEY-----\n",
+    "client_email": "packer@lenken-app.iam.gserviceaccount.com",
+    "client_id": "103502121577291119801",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/packer%40lenken-app.iam.gserviceaccount.com"
+  }

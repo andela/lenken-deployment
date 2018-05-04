@@ -4,6 +4,9 @@
     path: /var/app/lenken
     state: directory
 
+- name: Make application directory writable
+  command: sudo chmod -R 777 /var/app/lenken
+
 - name: ensure .ssh directory
   file:
     path: ~/.ssh
@@ -12,7 +15,7 @@
 
 - name: copy ssh key
   copy:
-    src: ~/.ssh/id_rsa
+    src: dev_files/git_key
     dest: ~/.ssh/id_rsa
 
 - name: change mode
@@ -28,13 +31,8 @@
     accept_hostkey: yes
     key_file: ~/.ssh/id_rsa
 
-- name: clone developv2
-  command: git checkout develop-v2
-  args:
-    chdir: /var/app/lenken
-
-- name: clone developv2
-  command: git pull origin develop-v2
+- name: clone current commit id
+  command: git checkout {{ commit_id }}
   args:
     chdir: /var/app/lenken
 
@@ -67,3 +65,5 @@
   command: yarn build
   args:
     chdir: /var/app/lenken
+  environment:
+    ENV: production
