@@ -27,7 +27,7 @@
                 "--extra-vars",
                 "env_variable=lenken_backend_production_env",
                 "--extra-vars",
-                "domain=lenken-api-beta.andela.com",
+                "domain=lenken-api.andela.com",
                 "--extra-vars",
                 "backend_build_commit=production_backend_build_commit"
             ]
