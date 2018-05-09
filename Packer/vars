@@ -1,0 +1,7 @@
+bucket = "lenken-production-tf-state"
+env_name = "production"
+lenken_frontend_image = "lenken-frontend-production"
+lenken_nat_ip = "35.187.119.82" 
+lenken_backend_image = "lenken-backend-production"
+lenken-nat-base = "lenken-nat-base"
+reserved_env_ip = "35.190.56.116"

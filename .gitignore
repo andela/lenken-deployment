@@ -1,3 +1,6 @@
+Packer/auth_lenken_app.json
+**.crt
+**.key
 Packer/auth.json
 Terraform/shared/lenken-account.json
 Terraform/production/shared/lenken-account.json

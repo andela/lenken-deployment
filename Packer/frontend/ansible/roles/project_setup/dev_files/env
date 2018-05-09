@@ -19,9 +19,10 @@ const firebaseConfigObject: Firebase = {
 export const environment = {
   production: false,
   firebaseConfig: firebaseConfigObject,
-  apiBaseUrl: 'https://lenken-api-test.andela.com/api',
-  lenkenBaseUrl: 'https://lenken-front-test.andela.com',
+  apiBaseUrl: 'https://lenken-api-staging.andela.com/api',
+  lenkenBaseUrl: 'https://lenken-staging-test.andela.com',
   apiGateway: 'https://api-staging.andela.com',
   segmentAPIKey: 'WmVlgctp4KY8XpgNBMveGUtimL9TW8ke',
   segmentAPIBaseUrl: 'https://api.segment.io',
+  intercomAppId: 'dgixpcoe',
 };
