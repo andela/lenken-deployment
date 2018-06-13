@@ -22,15 +22,19 @@
                 "--extra-vars",
                 "commit_id={{ user `commit_id` }}",
                 "--extra-vars",
-                "env_variable=lenken_frontend_production_env",
+                "env_variable=lenken_frontend_env",
                 "--extra-vars",
-                "domain=lenken.andela.com",
+                "domain=lenken-staging.andela.com",
                 "--extra-vars",
-                "frontend_build_commit=production_frontend_build_commit",
+                "frontend_build_commit=frontend_build_commit",
                 "--extra-vars",
-                "frontend_env_variable=lenken_frontend_production_env_ts",
+                "frontend_env_variable=lenken_frontend_env_ts",
                 "--extra-vars",
-                "frontend_env_prod=lenken_frontend_production_env_prod"
+                "env={{ user `environment` }}",
+                "--extra-vars",
+                "elk_ip=35.237.239.139",
+                "--extra-vars",
+                "frontend_env_prod=lenken_frontend_env_prod"
             ]
         }
     ]

@@ -1,0 +1,12 @@
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Copy nginx config
+  copy:
+    src: files/nginx
+    dest: /etc/nginx/sites-available/default
+
+- name: Restart nginx
+  command: systemctl restart nginx
