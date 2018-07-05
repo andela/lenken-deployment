@@ -1,9 +1,9 @@
 ### Continous Integration/Continous Delivery Pipeline
 The CI/CD pipelines on the frontend and backend are quite similar.
 
-####Continous Integration 
+#### Continous Integration 
 We use circleci version 2 for continous integration. 
-#####Why circleci 2.0 over circleci 1.0
+##### Why circleci 2.0 over circleci 1.0
 - CircleCI 2.0 includes a significant rewrite of container utilisation to run more jobs faster and to prevent available containers from sitting idle.
 - In CircleCI 2.0, jobs are broken down into steps. This gives us the freedom and flexibility to run the build the way we want, since we can compose these steps to our own discretion.
 - Jobs in version 2 support almost all public Docker images and custom images with our own dependencies.
@@ -21,14 +21,14 @@ In the workflow we have a number of jobs as listed below
 
 #### unit-tests
 
-#####image
+##### image
 For this job we use a custom image from our project named **lenken-frontend** and tagged **test-env**. We use a custom image because circleci doesnot support node 7 which is being used on the lenken project.
 	
 	- image: gcr.io/lenken-app/lenken-frontend:test-env
-#####parallelism
+##### parallelism
 We use parallelism of 3, this means that our tests will be split into 3 different groups and each group will run on a different machine in parallel. This will ensure the tests run in 1/3 of the time.
 
-#####steps in the unit-tests job
+##### steps in the unit-tests job
 
 - **checkout** The repo is cloned from source control
 - Installation of dependencies using `yarn install`
@@ -39,17 +39,17 @@ We use parallelism of 3, this means that our tests will be split into 3 differen
 #### deploy\_to\_staging
 This job is run only on the develop-v2 branch after the unit-tests job has succeeded.
 
-#####image
+##### image
 For this job we use the google cloud sdk image, this is because we shall be running gcloud commands within the job.
 
 ```- image: google/cloud-sdk```
 
-#####steps in the deploy\_to\_staging job
+##### steps in the deploy\_to\_staging job
 - **checkout** pull source code from source control
 - The gcloud service key from environment variables is added to a file named auth\_lenken\_app.json, this will be used for authentication against gcloud.
 - We deploy using deploy_lenken.sh script
 
-####deploy.sh 
+#### deploy.sh 
 
 The scripts contains three functions
 
@@ -69,10 +69,10 @@ In the workflow for the backend there are the following jobs:
 
 #### Build
 
-#####Image
+##### Image
 In the build job we use three images from circleci `circleci/php:7.1-browsers` for php and `circleci/postgres:9.6` for postgres and `redis` for the redis server.
 
-#####Steps in the build job 
+##### Steps in the build job 
 - Install php extensions needed for connecting to the postgresql database.
 - Install Composer.
 - Checkout pulls the source code from the github repository.
@@ -85,15 +85,15 @@ In the build job we use three images from circleci `circleci/php:7.1-browsers` f
 #### deploy\_to\_staging
 This job uses `/tmp/lenken` as the working directory meaning that is where the repository will be cloned to.
 
-#####image
+##### image
 The google/cloud_sdk image is used since the deployment will involve running gcloud commands.
 
-#####Steps in the deploy\_to\_staging
+##### Steps in the deploy\_to\_staging
 - Checkout clones the repository to tmp/lenken
 - Add Gcloud key json file echos the gcloud service key to auth_lenken_app json file, this will help to authenticate against gcp
 - Deploy to Production GCP Vms runs deploy_lenken.sh script which in turn does the deployment to gcp.
 
-#####deploy_lenken.sh
+##### deploy_lenken.sh
 Like deploy.sh in the frontend, deploy_lenken.sh has three functions as elaborated below:
 
 - configure_gcloud: function authenticates to gcp using the lenken_app_json file created earlier. Also sets the project and compute zone to correspond to the infrastructure on gcp.
