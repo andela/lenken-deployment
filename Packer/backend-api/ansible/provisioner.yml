@@ -9,4 +9,7 @@
     - new_relic
     - setup_project
     - nginx
+    - filebeat
+    - metricbeat
+    - packetbeat
     - service

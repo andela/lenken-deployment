@@ -25,11 +25,15 @@
                 "--extra-vars",
                 "new_relic_app={{ user `new_relic_app` }}",
                 "--extra-vars",
-                "env_variable=lenken_backend_production_env",
+                "env_variable=lenken_backend_env",
                 "--extra-vars",
-                "domain=lenken-api.andela.com",
+                "domain=lenken-api-staging.andela.com",
                 "--extra-vars",
-                "backend_build_commit=production_backend_build_commit"
+                "env={{ user `environment` }}",
+                "--extra-vars",
+                "elk_ip=35.237.239.139",
+                "--extra-vars",
+                "backend_build_commit=backend_build_commit"
             ]
         }
     ]

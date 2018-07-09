@@ -1,0 +1,17 @@
+---
+actions:
+    1:
+        action: delete_indices
+        description: Delete four day old indices
+        options:
+            ignore_empty_list: True
+        filters:
+        - filtertype: pattern
+          kind: regex
+          value: ‘^(filebeat-|packetbeat-|metricbeat-|).*$
+        - filtertype: age
+          source: name
+          direction: older
+          timestring: ‘%Y.%m.%d’
+          unit: days
+          unit_count: 4
