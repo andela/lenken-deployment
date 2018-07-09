@@ -1,0 +1,28 @@
+- name : Add elastic search apt-key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Adding elasticsearch APT-respository
+  apt_repository:
+     repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+     state: present
+
+- name: Install Packetbeat
+  apt:
+    name: packetbeat
+    state: present
+
+- name: Copy filebeat config
+  vars:
+    env: "{{ env }}"
+    elk_ip: "{{ elk_ip }}"
+  template:
+    src: files/packetbeat.j2
+    dest: /etc/packetbeat/packetbeat.yml
+
+- name: Restart packetbeat 
+  command: service packetbeat restart
+
+- name: Enable packetbeat start on boot 
+  command: systemctl enable packetbeat

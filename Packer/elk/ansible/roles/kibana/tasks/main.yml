@@ -1,0 +1,16 @@
+- name: Add repository to sources list
+  command: echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+
+- name: Update Repositories
+  command: apt-get update
+  
+- name: Install kibana
+  apt:
+    name: kibana
+    state: present
+
+- name: Start kibana
+  command: systemctl start kibana
+
+- name: Enable logstash to start at boot
+  command: systemctl enable kibana

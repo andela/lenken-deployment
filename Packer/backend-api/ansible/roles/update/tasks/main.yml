@@ -1,5 +1,8 @@
+- name: Update Repositories
+  command: apt-get update
+  
 - name: Install transport https
-  command: sudo apt-get install "{{item}}" -y
+  command: apt-get install "{{item}}" -y
   with_items:
     - apt-transport-https
     - build-essential
