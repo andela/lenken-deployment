@@ -4,6 +4,9 @@
     - update
     - node
     - project_setup
+    - filebeat
+    - metricbeat
+    - packetbeat
     - services
     - nginx
   environment:
