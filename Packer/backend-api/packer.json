@@ -7,7 +7,7 @@
             "source_image": "debian-8-jessie-v20180109",
             "ssh_username": "lenken-api",
             "zone": "europe-west1-b",
-            "image_name": "lenken-backend-{{ user `environment` }}"
+            "image_name": "lenken-backend-{{ user `environment` }}-{{timestamp}}"
         }
     ],
     "provisioners":[
@@ -25,15 +25,15 @@
                 "--extra-vars",
                 "new_relic_app={{ user `new_relic_app` }}",
                 "--extra-vars",
-                "env_variable=lenken_backend_env",
+                "env_variable={{ user `env_variable` }}",
                 "--extra-vars",
-                "domain=lenken-api-staging.andela.com",
+                "domain={{ user `domain` }}",
                 "--extra-vars",
                 "env={{ user `environment` }}",
                 "--extra-vars",
                 "elk_ip=35.237.239.139",
                 "--extra-vars",
-                "backend_build_commit=backend_build_commit"
+                "backend_build_commit={{ user `backend_build_commit` }}"
             ]
         }
     ]
