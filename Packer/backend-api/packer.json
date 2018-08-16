@@ -2,19 +2,35 @@
     "builders":[
         {
             "type": "googlecompute",
-            "account_file": "../auth.json",
-            "project_id": "andela-learning",
+            "account_file": "../auth_lenken_app.json",
+            "project_id": "{{ user `project_id`}}",
             "source_image": "debian-8-jessie-v20180109",
             "ssh_username": "lenken-api",
-            "zone": "us-central1-a",
-            "image_name": "lenken-backendapi-base"
+            "zone": "europe-west1-b",
+            "image_name": "lenken-backend-{{ user `environment` }}"
         }
     ],
     "provisioners":[
         {
             "type": "ansible",
             "playbook_file": "./ansible/provisioner.yml",
-            "ansible_env_vars": ["ANSIBLE_HOST_KEY_CHECKING=False"]
+            "ansible_env_vars": ["ANSIBLE_HOST_KEY_CHECKING=False"],
+            "extra_arguments": [
+                "--vault-password-file",
+                "~/.secret",
+                "--extra-vars",
+                "new_relic_licence={{ user `new_relic_licence` }}",
+                "--extra-vars",
+                "commit_id={{ user `commit_id` }}",
+                "--extra-vars",
+                "new_relic_app={{ user `new_relic_app` }}",
+                "--extra-vars",
+                "env_variable=lenken_backend_production_env",
+                "--extra-vars",
+                "domain=lenken-api.andela.com",
+                "--extra-vars",
+                "backend_build_commit=production_backend_build_commit"
+            ]
         }
     ]
 }
