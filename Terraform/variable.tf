@@ -31,6 +31,10 @@ variable "lenken_nat_ip" {
   type = "string"
 }
 
+variable "lenken_elk_ip" {
+  type = "string"
+}
+
 variable "lenken_backend_image" {
   type = "string"
 }
@@ -55,6 +59,11 @@ variable "machine_type" {
   default = "n1-standard-1"
 }
 
+variable "elk_machine_type" {
+  type = "string"
+  default = "n1-standard-1"
+}
+
 variable "small_machine_type" {
   type = "string"
   default = "g1-small"
@@ -70,12 +79,22 @@ variable "lenken_disk_image" {
   default = "test"
 }
 
+variable "lenken_elk_image" {
+  type = "string"
+  default = "test"
+}
+
 variable "lenken_disk_type" {
   type = "string"
   default = "pd-ssd"
 }
 
 variable "lenken_disk_size" {
+  type = "string"
+  default = "10"
+}
+
+variable "lenken_elk_disk_size" {
   type = "string"
   default = "10"
 }

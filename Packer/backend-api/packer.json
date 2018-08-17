@@ -7,13 +7,13 @@
             "source_image": "debian-8-jessie-v20180109",
             "ssh_username": "lenken-api",
             "zone": "europe-west1-b",
-            "image_name": "lenken-backend-{{ user `environment` }}"
+            "image_name": "lenken-backend-{{ user `environment` }}-{{timestamp}}"
         }
     ],
     "provisioners":[
         {
             "type": "ansible",
-            "playbook_file": "./ansible/provisioner.yml",
+            "playbook_file": "./ansible/{{ user `provisioner-file` }}",
             "ansible_env_vars": ["ANSIBLE_HOST_KEY_CHECKING=False"],
             "extra_arguments": [
                 "--vault-password-file",
@@ -25,11 +25,15 @@
                 "--extra-vars",
                 "new_relic_app={{ user `new_relic_app` }}",
                 "--extra-vars",
-                "env_variable=lenken_backend_production_env",
+                "env_variable={{ user `env_variable` }}",
                 "--extra-vars",
-                "domain=lenken-api.andela.com",
+                "domain={{ user `domain` }}",
                 "--extra-vars",
-                "backend_build_commit=production_backend_build_commit"
+                "env={{ user `environment` }}",
+                "--extra-vars",
+                "elk_ip=35.237.239.139",
+                "--extra-vars",
+                "backend_build_commit={{ user `backend_build_commit` }}"
             ]
         }
     ]

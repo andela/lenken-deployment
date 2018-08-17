@@ -7,14 +7,14 @@
             "source_image": "debian-8-jessie-v20180109",
             "ssh_username": "lenken-frontend",
             "zone": "europe-west1-b",
-            "image_name": "lenken-frontend-{{ user `environment`}}"
+            "image_name": "lenken-frontend-{{ user `environment`}}-{{timestamp}}"
         }
     ],
 
     "provisioners": [
         {
             "type": "ansible",
-            "playbook_file": "./ansible/provisioner.yml",
+            "playbook_file": "./ansible/{{ user `provisioner-file` }}",
             "ansible_env_vars": ["ANSIBLE_HOST_KEY_CHECKING=False"],
             "extra_arguments": [
                 "--vault-password-file",
@@ -22,15 +22,19 @@
                 "--extra-vars",
                 "commit_id={{ user `commit_id` }}",
                 "--extra-vars",
-                "env_variable=lenken_frontend_production_env",
+                "env_variable={{ user `env_variable` }}",
                 "--extra-vars",
-                "domain=lenken.andela.com",
+                "domain={{ user `domain` }}",
                 "--extra-vars",
-                "frontend_build_commit=production_frontend_build_commit",
+                "frontend_build_commit={{ user `frontend_build_commit` }}",
                 "--extra-vars",
-                "frontend_env_variable=lenken_frontend_production_env_ts",
+                "frontend_env_variable={{ user `frontend_env_variable` }}",
                 "--extra-vars",
-                "frontend_env_prod=lenken_frontend_production_env_prod"
+                "env={{ user `environment` }}",
+                "--extra-vars",
+                "elk_ip=35.237.239.139",
+                "--extra-vars",
+                "frontend_env_prod={{ user `frontend_env_prod` }}"
             ]
         }
     ]

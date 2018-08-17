@@ -1,0 +1,35 @@
+# - name: Public signing 
+#   shell: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+
+# - name: Add repository to sources list
+#   command: echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+- name : Add elastic search apt-key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Adding elasticsearch APT-respository
+  apt_repository:
+     repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+     state: present
+
+- name: Install logstash
+  apt:
+    name: logstash
+    update_cache: yes
+
+- name: Copy logstash config
+  copy:
+    src: files/beats.conf
+    dest: /etc/logstash/conf.d/beats.conf
+
+- name: Copy nginx logstash config
+  copy:
+    src: files/nginx.conf
+    dest: /etc/logstash/conf.d/nginx.conf
+
+- name: Start logstash
+  command: systemctl start logstash
+
+- name: Enable logstash to start at boot
+  command: systemctl enable logstash

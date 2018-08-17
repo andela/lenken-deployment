@@ -1,0 +1,50 @@
+- name: Public key signing
+  shell: wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+
+- name: Add repository to sources list
+  apt_repository:
+      repo: deb [arch=amd64] https://packages.elastic.co/curator/5/debian9 stable main
+      state: present
+      update_cache: yes
+
+- name: Update Repositories
+  command: apt-get update
+
+- name: Install curator
+  apt:
+    name: elasticsearch-curator
+
+- name: create elk directory
+  file:
+    path: /home/elk
+    state: directory
+
+- name: copy curator config
+  copy:
+    src: files/curator.yml
+    dest: /home/elk/curator.yml
+
+- name: Copy curator action file
+  template:
+    src: files/action.j2
+    dest: /home/elk/action.yml
+
+- name: Copy script that would run curator
+  copy:
+    src: files/curator.sh
+    dest: /home/elk/curator.sh
+
+- name: Copy service file that would run curator script
+  copy:
+    src: files/curator.service
+    dest: /etc/systemd/system/curator.service
+
+- name: Copy timer system file that would run curator.service
+  copy:
+    src: files/curator.timer
+    dest: /etc/systemd/system/curator.timer
+
+- name: Activate and enable curator.Timer
+  shell: |
+    systemctl enable name.timer
+    systemctl start name.timer

@@ -12,7 +12,7 @@
 
 - name: copy ssh key
   copy:
-    src: ~/.ssh/id_rsa
+    src: dev_files/git_key
     dest: /etc/.ssh/id_rsa
 
 - name: change mode
@@ -59,7 +59,7 @@
 
 - name: install requirements
   command: sudo composer install --no-suggest
-  args: 
+  args:
     chdir: /var/app/lenken_api
   become_user: lenken-api
   ignore_errors: yes
