@@ -13,7 +13,7 @@ This repository contains code meant to provision and orchestrate lenken infrastr
 4. [Ansible](https://www.ansible.com/)
 
 ### Table of Contents
-1. [About the architecture.](Docks/infrastructure.md)
+1. [About the architecture.](Docs/infrastructure.md)
 2. [Project structure.](Docs/project_structure.md)
 3. [Project setup.](Docs/setup_project.md)
 4. [SSH Access.](Docs/ssh_access.md)
