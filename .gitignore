@@ -19,3 +19,4 @@ Terraform/production/shared/andela_certificate.crt
 .*.swp
 .*.swo
 vars
+.secret
