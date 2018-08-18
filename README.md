@@ -17,11 +17,10 @@ This repository contains code meant to provision and orchestrate lenken infrastr
 2. [Project structure.](Docs/project_structure.md)
 3. [Project setup.](Docs/setup_project.md)
 4. [SSH Access.](Docs/ssh_access.md)
-4. [Continous Intergration/ Continous Delivery.]()
-5. [Monitoring and alerts.]()
-6. [Disaster management.]()
+4. [Continous Intergration/ Continous Delivery.](Docs/CI_CD.md)
 
 ### Contributors
 1. [Onen Julius](https://github.com/devGenie)
 2. [Kenechukwu Nnamani](https://github.com/kenec)
 3. [Assimwe Innocent](https://github.com/inno-asiimwe)
+4. [Harith Javed](https://github.com/HarithJ)
