@@ -1,0 +1,22 @@
+- name: Install new relic keys
+  apt_key:
+    url:  https://download.newrelic.com/548C16BF.gpg
+    state: present
+
+- name: Add new relic repository
+  apt_repository:
+    repo: 'deb http://apt.newrelic.com/debian/ newrelic non-free'
+    state: present
+
+- name: Update system
+  command: apt-get update
+
+- name: Install new relic
+  apt:
+    name: newrelic-php5
+
+- name: copy new relic config
+  template:
+    src: templates/newrelic.j2
+    dest: /etc/php/7.1/mods-available/newrelic.ini
+

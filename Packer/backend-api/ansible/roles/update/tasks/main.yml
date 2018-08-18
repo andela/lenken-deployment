@@ -1,14 +1,17 @@
+- name: Update Repositories
+  command: apt-get update
+  
 - name: Install transport https
-  apt:
-    name: "{{item}}"
-    state: present
+  command: apt-get install "{{item}}" -y
   with_items:
     - apt-transport-https
     - build-essential
     - lsb-release
+    - libcurl3-gnutls
     - ca-certificates
 
 - name: Install Nginx
+  remote_user: root
   apt:
     name: nginx
     state: present
@@ -17,6 +20,9 @@
   apt_key:
     url: https://packages.sury.org/php/apt.gpg
     state: present
+
+- name: Update system
+  command: apt-get update
 
 - name: Add extra repositories
   apt_repository:

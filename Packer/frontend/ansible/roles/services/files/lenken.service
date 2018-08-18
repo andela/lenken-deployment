@@ -2,7 +2,7 @@
 Description=This is the lenken frontend
 After=syslog.target
 [Service]
-ExecStart=/bin/bash -c "cd /var/app/lenken && node index.js"
+ExecStart=/bin/bash -c "/var/app/lenken/start.sh"
 RestartSec=5s
 Restart=on-success
 User=root

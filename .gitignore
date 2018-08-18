@@ -1,5 +1,25 @@
-Packer/auth.json
+Packer/auth_lenken_app.json
 **.crt
 **.key
+<<<<<<< HEAD
 Terraform/shared/*
 .DS_Store
+=======
+Packer/auth.json
+Terraform/shared/lenken-account.json
+Terraform/production/shared/lenken-account.json
+Terraform/terraform.tfstate.backup
+Terraform/production/terraform.tfstate.backup
+Terraform/terraform.tfstate
+Terraform/production/terraform.tfstate
+Terraform/.terraform/
+Terraform/production/.terraform/
+Terraform/shared/andela_key.key
+Terraform/production/shared/andela_key.key
+Terraform/shared/andela_certificate.crt
+Terraform/production/shared/andela_certificate.crt
+.*.swp
+.*.swo
+vars
+.secret
+>>>>>>> f759918f829ec851d2d5b09c7b57065a0ab4d4f0
