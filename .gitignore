@@ -1,10 +1,18 @@
-Packer/auth_lenken_app.json
+Packer/auth.json
 **.crt
 **.key
+<<<<<<< HEAD
 <<<<<<< HEAD
 Terraform/shared/*
 .DS_Store
 =======
+=======
+Terraform/shared/*
+<<<<<<< HEAD
+.DS_Store
+=======
+.DS_Store
+>>>>>>> ch-documentation
 Packer/auth.json
 Terraform/shared/lenken-account.json
 Terraform/production/shared/lenken-account.json
@@ -22,4 +30,8 @@ Terraform/production/shared/andela_certificate.crt
 .*.swo
 vars
 .secret
+<<<<<<< HEAD
 >>>>>>> f759918f829ec851d2d5b09c7b57065a0ab4d4f0
+=======
+>>>>>>> commit msg
+>>>>>>> ch-documentation
