@@ -3,7 +3,7 @@
     "builders":[
         {
             "type": "googlecompute",
-            "account_file": "../auth_lenken_app.json",
+            "account_file": "{{ user `credential_file` }}",
             "project_id": "{{ user `project_id`}}",
             "source_image": "debian-9-stretch-v20180510",
             "ssh_username": "nat-base",

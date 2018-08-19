@@ -2,12 +2,12 @@
     "builders": [
         {
             "type": "googlecompute",
-            "account_file": "../auth_lenken_app.json",
+            "account_file": "{{ user `credential_file` }}",
             "project_id": "{{ user `project_id`}}",
             "source_image": "debian-8-jessie-v20180109",
             "ssh_username": "lenken-frontend",
             "zone": "europe-west1-b",
-            "image_name": "lenken-frontend-{{ user `environment`}}-{{timestamp}}"
+            "image_name": "lenken-frontend-{{ user `environment`}}"
         }
     ],
 
