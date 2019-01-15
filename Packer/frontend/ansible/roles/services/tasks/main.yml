@@ -1,3 +1,15 @@
+- name: Copy start script 
+  vars:
+    lenken_frontend_env: "{{ frontend_env_variable }}"
+    lenken_frontend_env_prod: "{{ frontend_env_prod }}"
+    frontend_build_commit: "{{ frontend_build_commit }}"
+  template:
+    src: files/start.j2
+    dest: /var/app/lenken/start.sh
+
+- name: make file executable
+  command: sudo chmod a+x /var/app/lenken/start.sh
+
 - name: ensure service path exists
   file:
     path: /etc/systemd/system/

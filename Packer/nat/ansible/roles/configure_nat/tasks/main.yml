@@ -1,0 +1,11 @@
+- name: allow ip forwarding
+  command: sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+
+- name: masquerade packets
+  command: iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+- name: persist ip forwarding
+  command: echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf > /dev/null
+
+
+    

@@ -12,7 +12,7 @@
 
 - name: copy ssh key
   copy:
-    src: ~/.ssh/id_rsa
+    src: dev_files/git_key
     dest: /etc/.ssh/id_rsa
 
 - name: change mode
@@ -36,7 +36,6 @@
   become: true
   become_user: lenken-api
 
-
 - name: Ensure setfacl support is present
   package: name=acl
 
@@ -47,6 +46,11 @@
     accept_hostkey: yes
     key_file: /etc/.ssh/id_rsa
 
+- name: clone current commit id
+  command: git checkout {{ commit_id }}
+  args:
+    chdir: /var/app/lenken_api
+
 - name: download composer
   get_url:
     url: https://getcomposer.org/composer.phar
@@ -55,7 +59,7 @@
 
 - name: install requirements
   command: sudo composer install --no-suggest
-  args: 
+  args:
     chdir: /var/app/lenken_api
   become_user: lenken-api
   ignore_errors: yes

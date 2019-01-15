@@ -1,0 +1,9 @@
+[Unit]
+Description=Run the curator script
+
+[Service]
+Type=simple
+ExecStart=/home/elk/curator.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,34 @@
+- name: Public key signing 
+  shell: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Add repository to sources list
+  apt_repository:
+      repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+      state: present
+      update_cache: yes
+ 
+- name: Update Repositories
+  command: apt-get update
+
+- name: Install Elastic Search
+  apt:
+    name: elasticsearch
+
+- name: copy elasticsearch config 
+  copy:
+    src: files/elasticsearch.yml
+    dest: /etc/elasticsearch/elasticsearch.yml
+
+- name: Start elastic search
+  command: systemctl start elasticsearch
+
+- name: Enable elasticsearch to start at boot
+  command: systemctl enable elasticsearch
+
+
+  

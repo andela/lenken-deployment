@@ -6,6 +6,18 @@
     path: /etc/systemd/system/
     state: directory
 
+- name: copy production start script
+  vars:
+    branch: develop
+    env_variable: "{{ env_variable }}"
+    backend_build_commit: "{{ backend_build_commit }}"
+  template:
+    src: files/start.j2
+    dest: /var/app/lenken_api/start.sh
+
+- name: make file executable
+  command: sudo chmod a+x /var/app/lenken_api/start.sh
+
 - name: create lenken service
   copy:
     src: files/lenken.service
